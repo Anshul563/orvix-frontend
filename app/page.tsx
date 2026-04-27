@@ -1,65 +1,122 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+
+export default function HomePage() {
+  const router = useRouter();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="bg-[#0F0F14] text-white min-h-screen">
+      {/* 🔝 NAVBAR */}
+      <nav className="flex justify-between items-center px-8 py-4 border-b border-gray-800">
+        <h1 className="text-xl font-bold tracking-wide text-purple-400">
+          Orvix
+        </h1>
+
+        <div className="flex gap-6 text-sm">
+          <button className="hover:text-purple-400">Features</button>
+          <button className="hover:text-purple-400">Pricing</button>
+          <button className="hover:text-purple-400">Docs</button>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        <button
+          onClick={() => router.push("/dashboard")}
+          className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-sm"
+        >
+          Dashboard
+        </button>
+      </nav>
+
+      {/* 🚀 HERO SECTION */}
+      <section className="flex flex-col items-center text-center py-24 px-6">
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-5xl font-bold max-w-3xl leading-tight"
+        >
+          Meetings that{" "}
+          <span className="text-purple-500">think, adapt,</span> and{" "}
+          <span className="text-blue-400">build with you</span>
+        </motion.h1>
+
+        <p className="text-gray-400 mt-6 max-w-xl">
+          Orvix is a next-gen collaboration platform with real-time video,
+          AI-powered insights, and built-in teamwork tools.
+        </p>
+
+        <div className="flex gap-4 mt-8">
+          <button
+            onClick={() => router.push("/meet/demo")}
+            className="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-xl text-lg"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Start Meeting
+          </button>
+
+          <button className="border border-gray-700 px-6 py-3 rounded-xl hover:bg-gray-800">
+            Watch Demo
+          </button>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* 🎥 FEATURE SECTION */}
+      <section className="grid md:grid-cols-3 gap-6 px-10 py-16">
+        {[
+          {
+            title: "AI-Powered Meetings",
+            desc: "Auto summaries, action items, and smart insights.",
+          },
+          {
+            title: "Real-time Collaboration",
+            desc: "Chat, screen share, and build together live.",
+          },
+          {
+            title: "Low Bandwidth Mode",
+            desc: "Works smoothly even on weak internet.",
+          },
+        ].map((feature, i) => (
+          <div
+            key={i}
+            className="bg-[#1A1B23] p-6 rounded-2xl border border-gray-800 hover:border-purple-500 transition"
+          >
+            <h3 className="text-lg font-semibold mb-2 text-purple-400">
+              {feature.title}
+            </h3>
+            <p className="text-gray-400 text-sm">{feature.desc}</p>
+          </div>
+        ))}
+      </section>
+
+      {/* ⚡ LIVE EXPERIENCE SECTION */}
+      <section className="text-center py-20 px-6">
+        <h2 className="text-3xl font-bold mb-4">
+          Built for modern teams 🚀
+        </h2>
+
+        <p className="text-gray-400 max-w-xl mx-auto">
+          From developers to creators, Orvix helps teams communicate,
+          collaborate, and create—all in one place.
+        </p>
+      </section>
+
+      {/* 💬 CTA SECTION */}
+      <section className="text-center py-16 bg-linear-to-r from-purple-600 to-blue-500">
+        <h2 className="text-3xl font-bold mb-4">
+          Ready to upgrade your meetings?
+        </h2>
+
+        <button
+          onClick={() => router.push("/meet/demo")}
+          className="bg-black text-white px-6 py-3 rounded-xl mt-4 hover:bg-gray-900"
+        >
+          Try Orvix Now
+        </button>
+      </section>
+
+      {/* 🔻 FOOTER */}
+      <footer className="text-center py-6 text-gray-500 text-sm border-t border-gray-800">
+        © {new Date().getFullYear()} Orvix. All rights reserved.
+      </footer>
+    </main>
   );
 }
